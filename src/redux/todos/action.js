@@ -7,10 +7,10 @@ export const added = (todoText) => {
     }
 };
 
-export const toggle = (todoId) => {
+export const toggled = (todoId) => {
     return {
         type: TOGGLED,
-        payload: todoId
+        payload: todoId,
     }
 };
 
