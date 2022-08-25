@@ -4,7 +4,7 @@ import initialState from './initialState';
 import { ADDED, TOGGLED, COLORESELECTED, DELETED, ALLCOMPLETED, CLEARCOMPLETED } from './actionType';
 
 const nextTodoId = (todos) => {
-    const maxId = todos.reducer((maxId, todo) => Math.max(todo.id, maxId), -1);
+    const maxId = todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1);
     return maxId + 1;
 }
 
@@ -16,7 +16,9 @@ const reducer = (state = initialState, action) => {
             return [
                 ...state,
                 {
-                    id: nextTodoId(state)
+                    id: nextTodoId(state),
+                    text: action.payload,
+                    completed: false
                 }
             ]
 
