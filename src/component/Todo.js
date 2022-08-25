@@ -18,6 +18,7 @@ const Todo = ({ todo }) => {
     const handleDeleted = (todoId) => {
         dispatch(deleted(todoId));
     }
+
     return (
         <div
             className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0"
@@ -39,7 +40,7 @@ const Todo = ({ todo }) => {
                 </svg>}
             </div>
 
-            <div className="select-none flex-1 line-through">
+            <div className={`select-none flex-1 ${completed && 'line-through'}`}>
                 {text}
             </div>
 
