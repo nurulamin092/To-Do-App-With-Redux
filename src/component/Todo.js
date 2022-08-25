@@ -1,12 +1,22 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import cancelImage from '../assets/images/cancel.png';
-import { toggled } from '../redux/todos/actions';
+import { colorSelected, deleted, toggled } from '../redux/todos/actions';
 const Todo = ({ todo }) => {
     const dispatch = useDispatch();
     const { id, text, completed, color } = todo;
+
     const handleStatusChanged = (todoId) => {
-        dispatch(toggled(todoId))
+        dispatch(toggled(todoId));
+    }
+
+    const handleColorChange = (todoId, color) => {
+
+        dispatch(colorSelected(todoId, color))
+    }
+
+    const handleDeleted = (todoId) => {
+        dispatch(deleted(todoId));
     }
     return (
         <div
@@ -35,18 +45,18 @@ const Todo = ({ todo }) => {
 
             <div
                 className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer 
-                border-green-500 hover:bg-green-500 ${color === 'green' && 'bg-green-500'}`} >
+                border-green-500 hover:bg-green-500 ${color === 'green' && 'bg-green-500'}`} onClick={() => handleColorChange(id, 'green')} >
 
             </div>
             <div
                 className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer 
-                border-yellow-500 hover:bg-yellow-500 ${color === 'yellow' && 'bg-yellow-500'}`} >
+                border-yellow-500 hover:bg-yellow-500 ${color === 'yellow' && 'bg-yellow-500'}`} onClick={() => handleColorChange(id, 'yellow')} >
 
             </div>
 
             <div
                 className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer 
-                border-red-500 hover:bg-red-500 ${color === 'red' && 'bg-red-500'}`} >
+                border-red-500 hover:bg-red-500 ${color === 'red' && 'bg-red-500'}`} onClick={() => handleColorChange(id, 'red')}>
 
             </div>
 
@@ -54,6 +64,7 @@ const Todo = ({ todo }) => {
                 src={cancelImage}
                 className="flex-shrink-0 w-4 h-4 ml-2 cursor-pointer"
                 alt="Cancel"
+                onClick={() => handleDeleted(id)}
             />
         </div>
     );
